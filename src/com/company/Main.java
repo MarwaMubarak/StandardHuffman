@@ -72,16 +72,28 @@ public class Main {
                 sizeAfter+=x.getValue().length()*freq.get(x.getKey());
             }
         }
-        System.out.println("\nData Size Before Compression: "+sizeBefore+ " bits");
+        String decodedString="";
+        for (int i=0;i<n;i++){
+            String key=String.valueOf(s.charAt(i));
+            decodedString+=result.get(key);
+        }
+        System.out.println();
+        System.out.println("Decoded Data: "+decodedString);
+        System.out.println("Data Size Before Compression: "+sizeBefore+ " bits");
         System.out.println("Data Size After Compression: "+sizeAfter+ " bits");
 
+
+    }
+    public static void Decompression(String s){
 
     }
 
     public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
         String s = input.nextLine();
-        Compression(s);
+        //Compression(s);
+        Decompression(s);
+
 
     }
 }
