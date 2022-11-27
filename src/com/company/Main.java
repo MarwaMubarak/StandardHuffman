@@ -22,7 +22,9 @@ public class Main {
     }
 
 
-    public static void Compression(String s) {
+    public static void Compression() {
+        Scanner input = new Scanner(System.in);
+        String s = input.nextLine();
         int n = s.length();
         HashMap<String, Integer> freq = new HashMap<>();
         HashMap<String,String> result = new HashMap<>();
@@ -84,15 +86,34 @@ public class Main {
 
 
     }
-    public static void Decompression(String s){
+    public static void Decompression(){
+        Scanner input = new Scanner(System.in);
+        String s = input.nextLine();
+        int nn=s.length();
+        HashMap<String,String>decode = new HashMap<>();
+        int n=input.nextInt();
+        for (int i = 0; i < n; i++) {
+            String code=input.next();
+            String key=input.next();
+            decode.put(key,code);
+        }
+        String temp="";
+        String decoded="";
+        for (int i = 0; i < nn; i++) {
+            temp+=s.charAt(i);
+            if(decode.containsKey(temp)){
+                decoded+=decode.get(temp);
+                temp="";
+            }
+        }
+        System.out.println("Decoded Text: "+decoded);
 
     }
 
     public static void main(String[] args) {
-        Scanner input = new Scanner(System.in);
-        String s = input.nextLine();
-        //Compression(s);
-        Decompression(s);
+
+        Compression();
+        //Decompression();
 
 
     }
@@ -101,10 +122,16 @@ public class Main {
 /*
 abaacaadaa
 
-a : 1
-b : 010
-c : 00
-d : 011
+a   1
+b   010
+c   00
+d   011
+
+15
+
+80
+
+101011001101111
 
 
 
