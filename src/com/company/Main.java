@@ -141,9 +141,33 @@ public class Main {
     }
 
     public static void main(String[] args) {
+        Scanner input = new Scanner(System.in);
+        System.out.println("----------------------------");
+        System.out.println("--- Welcome To Huffman App ---");
+        System.out.println("----------------------------");
 
-        Compression();
-        //Decompression();
+            System.out.println("Choose Number From Our List To Start: ");
+            System.out.println("-------------------------------------");
+            System.out.println("1- Compression");
+            System.out.println("2- Decompression");
+            System.out.println("-------------------------------------");
+            System.out.print(">> ");
+            int choice = input.nextInt();
+            System.out.println("-------------------------------------");
+
+            if (choice == 1) {
+                Compression();
+                System.out.println("-------------------------------------");
+            } else if (choice == 2) {
+                Decompression();
+                System.out.println("-------------------------------------");
+            }
+
+
+
+
+//        Compression();
+//        Decompression();
 
 
     }
