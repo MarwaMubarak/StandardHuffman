@@ -1,5 +1,8 @@
 package com.company;
 
+import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
@@ -7,6 +10,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.PriorityQueue;
 import java.util.Scanner;
+import java.util.concurrent.TimeUnit;
 
 public class Main {
 
@@ -27,7 +31,7 @@ public class Main {
     public static void Compression() {
         Scanner input = null;
         try {
-            input = new Scanner(new FileInputStream("inputFile.txt"));
+            input = new Scanner(new FileInputStream("input.txt"));
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
@@ -70,7 +74,7 @@ public class Main {
         int sizeAfter = 0;
         int sizeBefore = n * 8;
         try {
-            PrintWriter printWriter = new PrintWriter("outputFile.txt");
+            PrintWriter printWriter = new PrintWriter("output.txt");
             String decodedString = "";
             printWriter.println("Huffman Code:");
             if (freq.size() == 1) {
@@ -96,6 +100,7 @@ public class Main {
             printWriter.println("Decoded Data: " + decodedString);
             printWriter.println("Data Size Before Compression: " + sizeBefore + " bits");
             printWriter.println("Data Size After Compression: " + sizeAfter + " bits");
+            //printWriter.flush();
             printWriter.close();
         } catch (FileNotFoundException e) {
             e.printStackTrace();
@@ -106,7 +111,7 @@ public class Main {
     public static void Decompression() {
         Scanner input = null;
         try {
-            input = new Scanner(new FileInputStream("inputFile.txt"));
+            input = new Scanner(new FileInputStream("input.txt"));
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
@@ -129,8 +134,9 @@ public class Main {
             }
         }
         try {
-            PrintWriter printWriter = new PrintWriter("outputFile.txt");
+            PrintWriter printWriter = new PrintWriter("output.txt");
             printWriter.println("Decoded Text: " + decoded);
+            //printWriter.flush();
             printWriter.close();
 
         } catch (FileNotFoundException e) {
@@ -141,33 +147,63 @@ public class Main {
     }
 
     public static void main(String[] args) {
-        Scanner input = new Scanner(System.in);
-        System.out.println("----------------------------");
-        System.out.println("--- Welcome To Huffman App ---");
-        System.out.println("----------------------------");
 
-            System.out.println("Choose Number From Our List To Start: ");
-            System.out.println("-------------------------------------");
-            System.out.println("1- Compression");
-            System.out.println("2- Decompression");
-            System.out.println("-------------------------------------");
-            System.out.print(">> ");
-            int choice = input.nextInt();
-            System.out.println("-------------------------------------");
+        JFrame frame_ = new JFrame("Huffman App");
+        JLabel label_1, label_2;
+        label_1 = new JLabel("Enter Input File Name");
+        label_1.setBounds(50, 20, 300, 25);
+        final JTextField input1 = new JTextField();
+        input1.setBounds(190, 25, 150, 25);
 
-            if (choice == 1) {
+        label_2 = new JLabel("Enter Output File Name");
+        label_2.setBounds(50, 70, 300, 25);
+        final JTextField input2 = new JTextField();
+        input2.setBounds(190, 70, 150, 25);
+
+        JButton button1 = new JButton("Compression");
+        button1.setBounds(350, 150, 150, 30);
+        JButton button2 = new JButton("Decompression");
+        button2.setBounds(150, 150, 150, 30);
+
+        button1.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
                 Compression();
-                System.out.println("-------------------------------------");
-            } else if (choice == 2) {
-                Decompression();
-                System.out.println("-------------------------------------");
+                try {
+                    TimeUnit.SECONDS.sleep(1);
+                } catch (InterruptedException ex) {
+                    ex.printStackTrace();
+                }
+                System.exit(0);
+
+
             }
+        });
+        button2.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Decompression();
+                try {
+                    TimeUnit.SECONDS.sleep(1);
+                } catch (InterruptedException ex) {
+                    ex.printStackTrace();
+                }
+                System.exit(0);
 
 
+            }
+        });
+        frame_.add(label_1);
+        frame_.add(label_2);
+        frame_.add(button1);
+        frame_.add(button2);
+        frame_.add(input1);
+        frame_.add(input2);
+        frame_.setSize(600, 250);
+        frame_.setLayout(null);
+        frame_.setVisible(true);
 
-
-//        Compression();
-//        Decompression();
 
 
     }
@@ -176,16 +212,16 @@ public class Main {
 /*
 abaacaadaa
 
+
+
+101011001101111
+4
 a   1
 b   010
 c   00
 d   011
 
-15
 
-80
-
-101011001101111
 
 
 
